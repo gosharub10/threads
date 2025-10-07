@@ -6,7 +6,7 @@ public static class Program
     {
         const int count = 3;
             
-        Data.StartProcessData(count);
-        await DataAsync.StartProcessDataAsync(count);
+        Data.ProcessBatchOfData(count);
+        await DataAsync.ProcessBatchOfDataAsync(count);
     }
 }

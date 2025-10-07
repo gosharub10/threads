@@ -9,7 +9,7 @@ public static class DataAsync
         return $"Обработка {dataName} завершена за 3 секунды";
     }
 
-    public static async Task StartProcessDataAsync(int count)
+    public static async Task ProcessBatchOfDataAsync(int count)
     {
         var tasks = new List<Task<string>>();
             
@@ -20,9 +20,11 @@ public static class DataAsync
 
         while (tasks.Count > 0)
         {
-            var result = await Task.WhenAny(tasks);
-            Console.WriteLine(await result);
-            tasks.Remove(result);
+            var finished = await Task.WhenAny(tasks);
+            tasks.Remove(finished);
+            
+            var result = await finished;
+            Console.WriteLine(result);
         }
     }
 }
